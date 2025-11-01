@@ -1,24 +1,47 @@
-# Compiled class file
-*.class
-
-# Log file
+# Arquivos de Log e Temporários
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
-# BlueJ files
-*.ctxt
+# Diretórios de build do Java/Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+build-*.log
+.mvn/timing.properties
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Banco de dados SQLite local
+escola.db
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Arquivos de configuração da IDE IntelliJ
+.idea/
+*.iml
+*.iws
+out/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Arquivos de configuração do VSCode
+.vscode/
+
+# Arquivos gerados pelo Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Arquivos gerados pelo Sistema Operacional
+.DS_Store
+Thumbs.db
