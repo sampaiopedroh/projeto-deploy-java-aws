@@ -79,12 +79,27 @@ jobs:
           username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "--- Parando a aplicação antiga (se existir) ---"
-            pkill -f 'java -jar' || true
+            # 1. Encontrar o PID (Process ID) do processo Java antigo, se existir
+            PID=$(pgrep -f 'java -jar')
             
-            echo "--- Iniciando a nova aplicação ---"
-            # CORREÇÃO AQUI: Procurando o JAR na pasta correta
+            # 2. Se um PID for encontrado, matar o processo de forma controlada
+            if [ -n "$PID" ]; then
+              echo "Parando processo Java antigo com PID: $PID"
+              kill $PID
+              # Esperar um momento para garantir que a porta foi liberada
+              sleep 5
+            else
+              echo "Nenhum processo Java antigo encontrado. Prosseguindo."
+            fi
+            
+            # 3. Encontrar o caminho do novo arquivo JAR
             export JAR_FILE=$(find /home/ec2-user -name "*.jar" | head -n 1)
             
-            echo "Iniciando o arquivo: $JAR_FILE"
-            nohup java -jar $JAR_FILE > /home/ec2-user/app.log 2>&1 &
+            # 4. Iniciar a nova aplicação em segundo plano
+            if [ -f "$JAR_FILE" ]; then
+              echo "Iniciando o arquivo: $JAR_FILE"
+              nohup java -jar $JAR_FILE > /home/ec2-user/app.log 2>&1 &
+            else
+              echo "ERRO: Arquivo JAR não encontrado!"
+              exit 1
+            fi
