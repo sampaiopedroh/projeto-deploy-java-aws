@@ -72,9 +72,15 @@ jobs:
           username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            export JAR_FILE=$(ls -t /home/ec2-user/*.jar | head -1)
+            echo "--- Verificando o arquivo copiado ---"
+            ls -la /home/ec2-user/
+            
+            echo "--- Parando a aplicação antiga (se existir) ---"
             pkill -f 'java -jar' || true
-            nohup java -jar $JAR_FILE > app.log 2>&1 &
+            
+            echo "--- Iniciando a nova aplicação ---"
+            export JAR_FILE=$(find /home/ec2-user -name "*.jar" | head -n 1)
+            nohup java -jar $JAR_FILE > /home/ec2-user/app.log 2>&1 &
 
   # JOB 2: Roda APENAS SE o job 'deploy' falhar
   destroy_on_failure:
