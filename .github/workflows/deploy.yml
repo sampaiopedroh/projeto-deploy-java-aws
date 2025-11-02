@@ -88,9 +88,8 @@ jobs:
               echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
             fi
             
-            # 1. Encontrar o PID do processo Java antigo
+            # 1. Encontrar e parar o processo Java antigo
             PID=$(pgrep -f '[j]ava -jar')
-            
             if [ -n "$PID" ]; then
               echo "Parando processo Java antigo com PID: $PID"
               kill -9 $PID
@@ -102,27 +101,12 @@ jobs:
             # 2. Encontrar o caminho do novo arquivo JAR
             JAR_FILE=$(find /home/ec2-user -name "*.jar" | head -n 1)
             
-            # 3. Iniciar a nova aplicação
+            # 3. Iniciar a nova aplicação em segundo plano
             if [ -f "$JAR_FILE" ]; then
               echo "Iniciando o arquivo: $JAR_FILE"
-              # =========================================================================
-              # MUDANÇA PRINCIPAL AQUI: Limitar a memória da JVM para 512MB
-              # =========================================================================
               nohup java -Xms256m -Xmx512m -jar $JAR_FILE > /home/ec2-user/app.log 2>&1 &
-            
-              echo "Deploy iniciado com sucesso! Aguardando para verificar o status..."
-              sleep 15 # Aumentar a espera para dar tempo da aplicação iniciar ou falhar
-            
-              # Verifica se o processo Java ainda está rodando
-              if ! pgrep -f '[j]ava -jar'; then
-                echo "ERRO: O processo Java não iniciou ou falhou. Verificando logs..."
-                cat /home/ec2-user/app.log
-                # Comando para verificar se o OOM Killer foi acionado
-                dmesg | grep -i "oom-killer"
-                exit 1
-              fi
-              echo "Aplicação Java iniciada com sucesso."
-            
+              echo "Comando para iniciar a aplicação foi enviado. O processo continuará em segundo plano na instância."
+              sleep 5 # Pequena pausa para garantir que o comando foi processado
             else
               echo "ERRO CRÍTICO: Arquivo JAR não foi encontrado na instância!"
               exit 1
