@@ -33,7 +33,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3 # <-- CORREÇÃO APLICADA AQUI
+        uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
         run: terraform init
@@ -56,7 +56,7 @@ jobs:
           sleep 30
 
       - name: Copy JAR to EC2 Instance
-        uses: appleboy/scp-action@v1.0.3
+        uses: appleboy/scp-action@v0.1.4 # <-- CORREÇÃO APLICADA AQUI
         with:
           host: ${{ env.INSTANCE_IP }}
           username: ec2-user
