@@ -47,7 +47,7 @@ jobs:
       - name: Get EC2 Public IP
         id: get_ip
         run: |
-          ip=$(terraform -chdir=${{ env.TF_WORKING_DIR }} output -raw instance_public_ip)
+          ip=$(terraform output -raw instance_public_ip)
           echo "INSTANCE_IP=$ip" >> "$GITHUB_ENV"
         working-directory: ${{ env.TF_WORKING_DIR }}
 
