@@ -10,7 +10,6 @@ env:
   TF_WORKING_DIR: ./infra
 
 jobs:
-  # JOB ÚNICO: Limpa, cria e faz o deploy
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -40,9 +39,6 @@ jobs:
         run: terraform init
         working-directory: ${{ env.TF_WORKING_DIR }}
 
-      # ====================================================================
-      # PASSO NOVO: Garante que qualquer infraestrutura antiga seja destruída
-      # ====================================================================
       - name: Terraform Destroy (Pre-Apply Cleanup)
         run: terraform destroy -auto-approve -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
         working-directory: ${{ env.TF_WORKING_DIR }}
