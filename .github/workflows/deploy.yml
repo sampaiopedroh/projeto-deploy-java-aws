@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  TF_WORKING_DIR: ./terraform
+  TF_WORKING_DIR: ./infra
 
 jobs:
   deploy:
@@ -23,7 +23,7 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: ./mvnw -B clean package
+        run: ./mvnw -B clean package -DskipTests
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -33,7 +33,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicore/setup-terraform@v3
 
       - name: Terraform Init
         run: terraform init

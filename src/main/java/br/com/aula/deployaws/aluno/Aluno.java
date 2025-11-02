@@ -1,10 +1,16 @@
-package br.com.aula.deploy_aws;
+package br.com.aula.deployaws.aluno;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Aluno {
 
@@ -14,19 +20,7 @@ public class Aluno {
 
     private String nome;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
+    public Aluno(String nome) {
         this.nome = nome;
     }
 }

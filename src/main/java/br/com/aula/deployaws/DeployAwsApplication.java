@@ -1,4 +1,4 @@
-package br.com.aula.deploy_aws;
+package br.com.aula.deployaws;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

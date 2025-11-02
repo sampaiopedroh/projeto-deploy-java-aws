@@ -4,6 +4,11 @@ spring:
     driver-class-name: org.sqlite.JDBC
   jpa:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
-    show-sql: true
     hibernate:
       ddl-auto: create-drop
+    show-sql: true
+    defer-datasource-initialization: true # Mantemos essa, é importante
+  sql: # <-- NOVA CONFIGURAÇÃO PARA GARANTIR EXECUÇÃO DE SCRIPTS
+    init:
+      mode: always
+      # data-locations: classpath:/data.sql # Pode ser deixado comentado se o nome for padrão 'data.sql'

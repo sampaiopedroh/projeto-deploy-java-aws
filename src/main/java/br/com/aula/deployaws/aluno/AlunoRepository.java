@@ -1,4 +1,4 @@
-package br.com.aula.deploy_aws;
+package br.com.aula.deployaws.aluno;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
