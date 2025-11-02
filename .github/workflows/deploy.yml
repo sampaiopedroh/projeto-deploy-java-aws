@@ -83,5 +83,8 @@ jobs:
             pkill -f 'java -jar' || true
             
             echo "--- Iniciando a nova aplicação ---"
-            export JAR_FILE=$(find /home/ec2-user/target -name "*.jar" | head -n 1)
+            # CORREÇÃO AQUI: Procurando o JAR na pasta correta
+            export JAR_FILE=$(find /home/ec2-user -name "*.jar" | head -n 1)
+            
+            echo "Iniciando o arquivo: $JAR_FILE"
             nohup java -jar $JAR_FILE > /home/ec2-user/app.log 2>&1 &
