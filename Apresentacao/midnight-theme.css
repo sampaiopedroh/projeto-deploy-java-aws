@@ -1,0 +1,110 @@
+/* @theme midnight-code */
+
+@import 'default';
+
+/* ===== Configurações Globais ===== */
+section {
+    --color-background: #1d1f21; /* Cinza escuro de editor */
+    --color-text: #c5c8c6;       /* Cinza claro para texto */
+    --color-highlight: #66d9ef;  /* Azul-ciano vibrante para destaque */
+    --color-heading: #ffffff;    /* Branco para títulos */
+    --font-family-main: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-family-code: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-family-main);
+    padding: 55px;
+    line-height: 1.6;
+}
+
+/* ===== Estilos dos Títulos ===== */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-heading);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h1 {
+    font-size: 3.0em;
+    color: var(--color-highlight);
+    text-align: center;
+    /* Efeito de brilho sutil no título principal */
+    text-shadow: 0 0 15px rgba(102, 217, 239, 0.4); 
+}
+
+h2 {
+    font-size: 2.2em;
+    border-bottom: 2px solid #3c4043; /* Linha sutil abaixo do H2 */
+    padding-bottom: 12px;
+    margin-top: 1.2em;
+}
+
+h3 {
+    font-size: 1.7em;
+    color: var(--color-highlight);
+    opacity: 0.9;
+}
+
+/* ===== Estilos de Links ===== */
+a {
+    color: var(--color-highlight);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
+
+/* ===== Blocos de Código ===== */
+pre, code {
+    font-family: var(--font-family-code);
+}
+
+pre {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid #3c4043;
+    border-radius: 8px;
+    padding: 1em;
+}
+
+/* ===== Listas e Tópicos ===== */
+ul li::before {
+    content: '»';
+    color: var(--color-highlight);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1.2em;
+}
+
+li {
+    margin-bottom: 12px;
+}
+
+/* ===== Citações (Blockquotes) ===== */
+blockquote {
+    border-left: 5px solid var(--color-highlight);
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 15px 20px;
+    color: #e0e0e0;
+    font-style: italic;
+}
+
+/* ===== Rodapé e Paginação ===== */
+footer {
+    position: absolute;
+    bottom: 30px;
+    right: 55px;
+    font-size: 0.8em;
+    color: #707070;
+}
+
+/* Classe especial para o slide de título (centralizado) */
+section.lead {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
